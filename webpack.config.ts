@@ -22,7 +22,14 @@ const config: webpack.Configuration = {
   },
   module: {
     rules: [
-      { test: /\.([cm]?ts|tsx)$/, use: "ts-loader", exclude: /node_modules/ },
+      {
+        test: /\.([cm]?ts|tsx)$/,
+        loader: "ts-loader",
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        }
+      },
       { test: /\.vue$/, use: 'vue-loader' },
     ]
   },
