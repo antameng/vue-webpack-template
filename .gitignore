@@ -1,0 +1,5 @@
+# 忽略 node_modules 目录
+node_modules/
+
+# 忽略 dist 目录下的所有内容，但保留目录本身
+dist
