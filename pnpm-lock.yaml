@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
       vue:
         specifier: ^3.4.27
         version: 3.4.27(typescript@5.4.5)
@@ -39,6 +36,9 @@ importers:
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@20.12.12)(typescript@5.4.5)
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
       unplugin-auto-import:
         specifier: ^0.17.6
         version: 0.17.6
