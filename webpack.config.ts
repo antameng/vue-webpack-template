@@ -16,7 +16,7 @@ const config: Configuration = {
   },
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension.
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".ts", ".tsx", ".js"],// 扩展省略
     // Add support for TypeScripts fully qualified ESM imports.
     extensionAlias: {
       ".js": [".js", ".ts"],
@@ -68,13 +68,14 @@ const config: Configuration = {
         libs: {
           name: 'chunk-libs',
           test: /[\\/]node_modules[\\/]/,
-          filename: 'libs.js',
+          filename: 'libs.[chunkhash:4].js',
           priority: 10,
           chunks: 'initial', // 只打包最初依赖的第三方 设置 chunks 为 'initial' 时，Webpack 只会拆分那些同步导入的代码块。
           minChunks: 1
         },
         commons: {
           name: 'chunk-commons',
+          filename:'commons.[chunkhash:4].js',
           test: resolve('src'), // can customize your rules
           minChunks: 3, //  minimum common number
           priority: 5,
@@ -82,6 +83,7 @@ const config: Configuration = {
         },
         elementUI: {
           name: 'chunk-elementUI',
+          filename:'elementUI.[chunkhash:4].js',
           test: /[\\/]node_modules[\\/]_?element-plus(.*)/,  // 为了适应CNPM
           priority: 20, // 重量需要大于lib和app，否则将被打包到lib或app中
         }
