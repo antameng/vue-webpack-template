@@ -6,13 +6,15 @@ const eslintPlugin = require('eslint-webpack-plugin')
 import AutoImport from 'unplugin-auto-import/webpack';
 import Components from 'unplugin-vue-components/webpack';
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+const minicss = require('mini-css-extract-plugin')
 const config: Configuration = {
   mode: 'production',
   entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    clean: true
+    clean: true,
+    // publicPath:'www.vue.org'    //cdn地址
   },
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension.
@@ -40,11 +42,14 @@ const config: Configuration = {
       { test: /\.vue$/, use: 'vue-loader' },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: [minicss.loader, 'style-loader', 'css-loader']
       }
     ]
   },
   plugins: [
+    new minicss({
+      filename: './css/test.bundle.css'
+    }),
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: './index.html'
@@ -75,7 +80,7 @@ const config: Configuration = {
         },
         commons: {
           name: 'chunk-commons',
-          filename:'commons.[chunkhash:4].js',
+          filename: 'commons.[chunkhash:4].js',
           test: resolve('src'), // can customize your rules
           minChunks: 3, //  minimum common number
           priority: 5,
@@ -83,7 +88,7 @@ const config: Configuration = {
         },
         elementUI: {
           name: 'chunk-elementUI',
-          filename:'elementUI.[chunkhash:4].js',
+          filename: 'elementUI.[chunkhash:4].js',
           test: /[\\/]node_modules[\\/]_?element-plus(.*)/,  // 为了适应CNPM
           priority: 20, // 重量需要大于lib和app，否则将被打包到lib或app中
         }
