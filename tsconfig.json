@@ -111,4 +111,7 @@
 //    "src/**/*.tsx",
 //    "src/**/*.d.ts",
 //  ]
+  "exclude": [  // 排除
+    "node_modules"
+  ]
 }
